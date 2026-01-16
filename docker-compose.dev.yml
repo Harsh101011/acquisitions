@@ -1,0 +1,29 @@
+services:
+  app:
+    build:
+      context: .
+      target: development
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - DATABASE_URL=postgres://neon:npg@neon-local:5432/main
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - neon-local
+
+  neon-local:
+    image: neondatabase/neon_local:latest
+    ports:
+      - '5432:5432'
+      - '5433:5433'
+    environment:
+      - NEON_API_KEY=${NEON_API_KEY}
+      - NEON_PROJECT_ID=${NEON_PROJECT_ID}
+      - DELETE_BRANCH=false
+    volumes:
+      - ./.neon_local/:/tmp/.neon_local
+      - ./.git/HEAD:/tmp/.git/HEAD:ro,consistent
