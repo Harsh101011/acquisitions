@@ -8,6 +8,13 @@
       "when": 1766602864477,
       "tag": "0000_outstanding_black_tom",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1768547543340,
+      "tag": "0001_stale_scrambler",
+      "breakpoints": true
     }
   ]
 }
