@@ -364,3 +364,5 @@
 {"level":"info","message":"User sanju@gmail.com created successfully","service":"acquisitions-api"}
 {"level":"info","message":"User registered successfully: sanju@gmail.com","service":"acquisitions-api"}
 {"level":"info","message":"::1 - - [16/Jan/2026:11:02:22 +0000] \"POST /api/auth/sign-up HTTP/1.1\" 201 103 \"-\" \"HTTPie\"","service":"acquisitions-api"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [22/Apr/2026:19:48:10 +0000] \"GET /health HTTP/1.1\" 200 73 \"-\" \"-\"","service":"acquisitions-api"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [22/Apr/2026:19:48:58 +0000] \"GET /health HTTP/1.1\" 200 73 \"-\" \"-\"","service":"acquisitions-api"}

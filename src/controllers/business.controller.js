@@ -24,12 +24,10 @@ export const createBusiness = async (req, res) => {
     res.status(201).json(newBusiness);
   } catch (error) {
     logger.error('Error creating business:', error);
-    res
-      .status(500)
-      .json({
-        error: 'Internal server error',
-        message: 'Failed to create business',
-      });
+    res.status(500).json({
+      error: 'Internal server error',
+      message: 'Failed to create business',
+    });
   }
 };
 
@@ -39,12 +37,10 @@ export const getBusinesses = async (req, res) => {
     res.status(200).json(allBusinesses);
   } catch (error) {
     logger.error('Error fetching businesses:', error);
-    res
-      .status(500)
-      .json({
-        error: 'Internal server error',
-        message: 'Failed to fetch businesses',
-      });
+    res.status(500).json({
+      error: 'Internal server error',
+      message: 'Failed to fetch businesses',
+    });
   }
 };
 
@@ -65,12 +61,10 @@ export const getBusinessById = async (req, res) => {
     res.status(200).json(business);
   } catch (error) {
     logger.error('Error fetching business:', error);
-    res
-      .status(500)
-      .json({
-        error: 'Internal server error',
-        message: 'Failed to fetch business',
-      });
+    res.status(500).json({
+      error: 'Internal server error',
+      message: 'Failed to fetch business',
+    });
   }
 };
 
@@ -93,12 +87,10 @@ export const updateBusiness = async (req, res) => {
     }
 
     if (business.ownerId !== userId && userRole !== 'admin') {
-      return res
-        .status(403)
-        .json({
-          error: 'Forbidden',
-          message: 'You are not authorized to update this business',
-        });
+      return res.status(403).json({
+        error: 'Forbidden',
+        message: 'You are not authorized to update this business',
+      });
     }
 
     const [updatedBusiness] = await db
@@ -118,12 +110,10 @@ export const updateBusiness = async (req, res) => {
     res.status(200).json(updatedBusiness);
   } catch (error) {
     logger.error('Error updating business:', error);
-    res
-      .status(500)
-      .json({
-        error: 'Internal server error',
-        message: 'Failed to update business',
-      });
+    res.status(500).json({
+      error: 'Internal server error',
+      message: 'Failed to update business',
+    });
   }
 };
 
@@ -145,12 +135,10 @@ export const deleteBusiness = async (req, res) => {
     }
 
     if (business.ownerId !== userId && userRole !== 'admin') {
-      return res
-        .status(403)
-        .json({
-          error: 'Forbidden',
-          message: 'You are not authorized to delete this business',
-        });
+      return res.status(403).json({
+        error: 'Forbidden',
+        message: 'You are not authorized to delete this business',
+      });
     }
 
     await db.delete(businesses).where(eq(businesses.id, Number(id)));
@@ -159,11 +147,9 @@ export const deleteBusiness = async (req, res) => {
     res.status(200).json({ message: 'Business deleted successfully' });
   } catch (error) {
     logger.error('Error deleting business:', error);
-    res
-      .status(500)
-      .json({
-        error: 'Internal server error',
-        message: 'Failed to delete business',
-      });
+    res.status(500).json({
+      error: 'Internal server error',
+      message: 'Failed to delete business',
+    });
   }
 };

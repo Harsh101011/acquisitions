@@ -24,8 +24,8 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
-    "dev:docker": "sh setup-dev.sh",
-    "prod:docker": "sh setup-prod.sh",
+    "dev:docker": "node scripts/setup-dev.js",
+    "prod:docker": "node scripts/setup-prod.js",
     "test": "cross-env NODE_ENV=test ARCJET_ENV=development NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "repository": {

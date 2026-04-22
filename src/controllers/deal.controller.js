@@ -22,12 +22,10 @@ export const createDeal = async (req, res) => {
 
     // specific rule: Owner cannot buy their own business
     if (business.ownerId === buyerId) {
-      return res
-        .status(400)
-        .json({
-          error: 'Bad Request',
-          message: 'Cannot buy your own business',
-        });
+      return res.status(400).json({
+        error: 'Bad Request',
+        message: 'Cannot buy your own business',
+      });
     }
 
     const [newDeal] = await db
@@ -47,12 +45,10 @@ export const createDeal = async (req, res) => {
     res.status(201).json(newDeal);
   } catch (error) {
     logger.error('Error creating deal:', error);
-    res
-      .status(500)
-      .json({
-        error: 'Internal server error',
-        message: 'Failed to create deal',
-      });
+    res.status(500).json({
+      error: 'Internal server error',
+      message: 'Failed to create deal',
+    });
   }
 };
 
@@ -74,12 +70,10 @@ export const getDealsForBusiness = async (req, res) => {
     }
 
     if (business.ownerId !== userId && req.user.role !== 'admin') {
-      return res
-        .status(403)
-        .json({
-          error: 'Forbidden',
-          message: 'Not authorized to view deals for this business',
-        });
+      return res.status(403).json({
+        error: 'Forbidden',
+        message: 'Not authorized to view deals for this business',
+      });
     }
 
     const businessDeals = await db
@@ -89,12 +83,10 @@ export const getDealsForBusiness = async (req, res) => {
     res.status(200).json(businessDeals);
   } catch (error) {
     logger.error('Error fetching deals:', error);
-    res
-      .status(500)
-      .json({
-        error: 'Internal server error',
-        message: 'Failed to fetch deals',
-      });
+    res.status(500).json({
+      error: 'Internal server error',
+      message: 'Failed to fetch deals',
+    });
   }
 };
 
@@ -108,12 +100,10 @@ export const getMyDeals = async (req, res) => {
     res.status(200).json(myDeals);
   } catch (error) {
     logger.error('Error fetching my deals:', error);
-    res
-      .status(500)
-      .json({
-        error: 'Internal server error',
-        message: 'Failed to fetch deals',
-      });
+    res.status(500).json({
+      error: 'Internal server error',
+      message: 'Failed to fetch deals',
+    });
   }
 };
 
@@ -152,24 +142,20 @@ export const updateDealStatus = async (req, res) => {
     // Logic for state transitions could be more complex, simplification here
     if (isBuyer && status === 'cancelled') {
       if (deal.status !== 'pending') {
-        return res
-          .status(400)
-          .json({
-            error: 'Bad Request',
-            message: 'Can only cancel pending deals',
-          });
+        return res.status(400).json({
+          error: 'Bad Request',
+          message: 'Can only cancel pending deals',
+        });
       }
     } else if (isOwner && (status === 'accepted' || status === 'rejected')) {
       // Owner accepting/rejecting
     } else if (req.user.role === 'admin') {
       // Admin can do anything
     } else {
-      return res
-        .status(403)
-        .json({
-          error: 'Forbidden',
-          message: 'Invalid status change for your role',
-        });
+      return res.status(403).json({
+        error: 'Forbidden',
+        message: 'Invalid status change for your role',
+      });
     }
 
     const [updatedDeal] = await db
@@ -185,11 +171,9 @@ export const updateDealStatus = async (req, res) => {
     res.status(200).json(updatedDeal);
   } catch (error) {
     logger.error('Error updating deal:', error);
-    res
-      .status(500)
-      .json({
-        error: 'Internal server error',
-        message: 'Failed to update deal',
-      });
+    res.status(500).json({
+      error: 'Internal server error',
+      message: 'Failed to update deal',
+    });
   }
 };
